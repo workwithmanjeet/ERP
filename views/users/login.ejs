@@ -1,0 +1,42 @@
+
+<% layout('layouts/boilerplate') %> 
+<div class="row">
+    <a href="/register">New User! Register First</a>
+    <h1 class="text-center">User LogIn </h1>
+    <div class="col-6 offset-3">
+        <form action="/login" method="POST" class="formvalidation" >
+            <div class="mb-3">
+                <label class="form-label" for="username">Email</label>
+                <input class="form-control" type="email" id="username" name="user[username]" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="UserType">UserType</label>
+                <select class="form-select" name="user[userType]" required aria-label="Default select example">
+                    <option selected value="">Select</option>
+                    <option value="admin">Admin</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="user[password]" required>
+            </div>
+            
+
+            <div class="mb-3">
+                <button class="btn btn-success">LogIn</button>
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+
+
+
+
+
+

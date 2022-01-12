@@ -1,0 +1,54 @@
+<% layout('layouts/boilerplate') %> 
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+            <h3> Views Students </h3>
+
+			<form class="form-group" action="/adminpannel/views" method="POST">
+                <div class="mb-3">
+                    <input class="form-control " type="text" id="sname" name="filter[name]"  placeholder="Name">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="number" id="age" name="filter[age]" placeholder="Age">
+                </div>
+                <div class="mb-3">
+                    <select class="form-select"  name="filter[gender]" aria-label="Default select example">
+                        <option selected value="" >Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" name="filter[class]" aria-label="Default select example">
+                        <option selected value=''>Class</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" name="filter[division]" aria-label="Default select example">
+                        <option selected value=''>Division</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                </div>
+            
+              </form>
+		</div>
+	</div>
+	

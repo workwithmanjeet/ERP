@@ -1,0 +1,64 @@
+<% layout('layouts/boilerplate') %> 
+<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>
+							RegNo
+						</th>
+						<th>
+							Student   Name
+						</th>
+						<th>
+							Class
+						</th>
+						<th>
+							Gender
+						</th>
+						<th>
+							 Age
+						</th>
+						<th>
+							Options
+					   </th>
+					
+					</tr>
+				</thead>
+				<tbody>
+					<% for(let ss of students){ %>
+						<tr>
+							<td>
+								<%= ss.regno %> 
+							</td>
+							<td>
+								<%= ss.name %> 
+							</td>
+							<td>
+								<%= ss.class %> 
+							</td>
+							<td>
+								<%= ss.gender %> 
+							</td>
+							<td>
+								<%= ss.age %> 
+							</td>
+							<td>
+								<a  href="/adminpannel/s/<%= ss._id %>">View</a>
+							
+							</td>
+	
+						</tr>
+
+
+
+					<% } %>  
+					
+					
+				
+				</tbody>
+			</table>
+	
+		</div>
+	</div>
+</div>
