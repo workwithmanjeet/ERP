@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -24,7 +29,9 @@ const User = require('./models/user')
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost:27017/erp',{
+// || 'mongodb://localhost:27017/erp'
+const dbUrl = process.env.DB_URL;
+mongoose.connect(dbUrl,{
    
 });
 const db = mongoose.connection;
@@ -68,7 +75,9 @@ app.use((req, res,next)=>{
 })
 
 
-
+app.get('/', (req,res)=>{
+    res.render('home.ejs');
+})
 
 app.use('/',adminRoutes)
 app.use('/',usersRoutes)
