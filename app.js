@@ -72,7 +72,7 @@ const app = express();
 
 // app.use('/',adminRoutes)
 // app.use('/',usersRoutes)
-app.use('/',(req, res)=>{
+app.get('/',(req, res)=>{
     res.send("hii");
 });
 app.listen(3001,()=>{
