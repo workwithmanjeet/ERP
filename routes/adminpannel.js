@@ -1,35 +1,41 @@
 const express = require('express');
 const router = express.Router();
+const {isLoggedIn,isAdmin} = require('../middleware');
 const Students = require('../models/students')
+const Counter = require('../models/counter')
+const users = require('../models/user')
 
-router.get('/adminpannel',(req,res)=>{
+router.get('/adminpannel',isLoggedIn,isAdmin,(req,res)=>{
     // res.send("all ok")
     res.render('adminpannel/pannel.ejs')
 })
 
 
-router.get('/adminpannel/new',(req,res)=>{
+router.get('/adminpannel/new',isLoggedIn,isAdmin,(req,res)=>{
     // res.send("all ok")
     res.render('adminpannel/new.ejs')
 })
 
-router.post('/adminpannel/new', async (req,res)=>{
+router.post('/adminpannel/new', isLoggedIn,isAdmin, async (req,res)=>{
     console.log(req.body);
     // res.send(req.body)
     var filter = req.body.filter
     const d=new Date()
     filter.age= d.getFullYear()-Number(filter.dob.slice(0,4))
-    filter.regno=1802
-    res.locals.regno=res.locals.regno+1
- 
+    const cc =await Counter.findById('61dfbb43e73b8e3d181f9ce0')
+    console.log(cc)
+    filter.regno=cc["lastReg"]
+    cc["lastReg"]+=1
+    await cc.save();
+
     console.log(req.body);
     const student= new Students(filter)
     await student.save();
     console.log(student);
-    res.send(student)
+    res.redirect(`/adminpannel/s/${student._id}`)
 
 })
-router.get('/adminpannel/s/:id', async (req,res)=>{
+router.get('/adminpannel/s/:id', isLoggedIn, isAdmin,async (req,res)=>{
     const {id}=req.params
     console.log(id)
     const student =await Students.findById(id)
@@ -37,7 +43,7 @@ router.get('/adminpannel/s/:id', async (req,res)=>{
     res.render('adminpannel/edit.ejs',{student})
 })
 
-router.delete('/adminpannel/s/:id', async (req,res) =>{
+router.delete('/adminpannel/s/:id', isLoggedIn,isAdmin,async (req,res) =>{
     const {id} = req.params;
     const ss = await Students.findByIdAndDelete(id)
     console.log(ss);
@@ -46,7 +52,7 @@ router.delete('/adminpannel/s/:id', async (req,res) =>{
  
 })
 
-router.patch('/adminpannel/s/:id',async (req,res) =>{
+router.patch('/adminpannel/s/:id', isLoggedIn,isAdmin,async (req,res) =>{
     const {id} = req.params;
     console.log(req.body);
     const camp = await Students.findByIdAndUpdate(id,req.body.ss)
@@ -57,7 +63,7 @@ router.patch('/adminpannel/s/:id',async (req,res) =>{
     // res.send("okk")
  
 })
-router.post('/adminpannel/views', async (req,res)=>{
+router.post('/adminpannel/views', isLoggedIn,isAdmin,async (req,res)=>{
     let fil={}
     for (let i in req.body.filter){
         if (req.body.filter[i]){

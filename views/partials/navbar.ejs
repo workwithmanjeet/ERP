@@ -8,16 +8,15 @@
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="/adminpannel">Admin Pannel</a>
           <a class="nav-link" href="/adminpannel/new">New Admission</a>
-         
-        </div>
-        div class="navbar-nav ml-auto">
           <% if(!currentUser) {%> 
             <a class="nav-link" href="/login">LogIn</a>
             <a class="nav-link" href="/register">Register</a>
           <% } else { %> 
             <a class="nav-link" href="/logout">Logout</a>
           <% } %> 
-          </div>
+         
+        </div>
+        
       </div>
     </div>
   </nav>
