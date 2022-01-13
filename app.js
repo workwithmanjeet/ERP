@@ -9,7 +9,7 @@ const path = require('path');
 const ejsmate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
-
+const MongoStore = require('connect-mongo');
 
 app.engine('ejs',ejsmate)
 app.use(express.urlencoded({extended: true}))
@@ -40,10 +40,22 @@ db.once('open',() =>{
     console.log("Database Connected");
     
 })
+const secret = process.env.SECRET ;
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e)
+})
 
 const sessionConfig = {
+    store,
     name: 'sessionabs',
-    secret: 'nvdfsvdsvvvvvvv',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie:{
