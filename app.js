@@ -75,7 +75,7 @@ const app = express();
 app.get('/',(req, res)=>{
     res.send("hii");
 });
-app.listen(3001,()=>{
-    console.log("On port  3001")
+app.listen(3000,()=>{
+    console.log("On port  3000")
 })
 
